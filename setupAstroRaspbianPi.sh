@@ -191,25 +191,25 @@ display "Setting HDMI settings in /boot/config.txt."
 # This pretends an HDMI display is connected at all times, otherwise, the pi might shut off HDMI
 # So that when you go to plug in an HDMI connector to diagnose a problem, it doesn't work
 # This makes the HDMI output always available
-if [ -n "$(grep '#hdmi_force_hotplug=1' '/boot/config.txt')" ]
+if [ -n "$(grep '#hdmi_force_hotplug=1' '/boot/firmware/config.txt')" ]
 then
-	sed -i "s/#hdmi_force_hotplug=1/hdmi_force_hotplug=1/g" /boot/config.txt
+	sed -i "s/#hdmi_force_hotplug=1/hdmi_force_hotplug=1/g" /boot/firmware/config.txt
 fi
 
 # This sets the group for the HDMI mode.  Please see the config file for details about all the different modes
 # There are many options.  I selected group 1 mode 46 because that matches my laptop's resolution.
 # You might want a different mode and group if you want a certain resolution in VNC
-if [ -n "$(grep '#hdmi_group=1' '/boot/config.txt')" ]
+if [ -n "$(grep '#hdmi_group=1' '/boot/firmware/config.txt')" ]
 then
-	sed -i "s/#hdmi_group=1/hdmi_group=2/g" /boot/config.txt
+	sed -i "s/#hdmi_group=1/hdmi_group=2/g" /boot/firmware/config.txt
 fi
 
 # This sets the HDMI mode.  Please see the config file for details about all the different modes
 # There are many options.  I selected group 1 mode 46 because that matches my laptop's resolution.
 # You might want a different mode and group if you want a certain resolution in VNC
-if [ -n "$(grep '#hdmi_mode=1' '/boot/config.txt')" ]
+if [ -n "$(grep '#hdmi_mode=1' '/boot/firmware/config.txt')" ]
 then
-	sed -i "s/#hdmi_mode=1/hdmi_mode=46/g" /boot/config.txt
+	sed -i "s/#hdmi_mode=1/hdmi_mode=46/g" /boot/firmware/config.txt
 fi
 
 # This comments out a line in Raspbian's config file that seems to prevent the desired screen resolution in VNC
@@ -217,13 +217,13 @@ fi
 # However it should be noted that this change may disable the 2nd HDMI output.
 # If you want to use your PI in a headless mode and set your own resolution, you need to run this code on a PI 4.
 # If you want to use two HDMI monitors with the PI 4, instead of going headless, you should not run this code.
-if [ -n "$(grep '^dtoverlay=vc4-kms-v3d' '/boot/config.txt')" ]
+if [ -n "$(grep '^dtoverlay=vc4-kms-v3d' '/boot/frimware/config.txt')" ]
 then
-	sed -i "s/dtoverlay=vc4-kms-v3d/#dtoverlay=vc4-kms-v3d/g" /boot/config.txt
+	sed -i "s/dtoverlay=vc4-kms-v3d/#dtoverlay=vc4-kms-v3d/g" /boot/firmware/config.txt
 fi
-if [ -n "$(grep '^dtoverlay=vc4-fkms-v3d' '/boot/config.txt')" ]
+if [ -n "$(grep '^dtoverlay=vc4-fkms-v3d' '/boot/firmware/config.txt')" ]
 then
-	sed -i "s/dtoverlay=vc4-fkms-v3d/#dtoverlay=vc4-fkms-v3d/g" /boot/config.txt
+	sed -i "s/dtoverlay=vc4-fkms-v3d/#dtoverlay=vc4-fkms-v3d/g" /boot/firmware/config.txt
 fi
 
 
@@ -668,7 +668,7 @@ sudo chown $SUDO_USER:$SUDO_USER $USERHOME/.config/kdeglobals
 
 # Installs Pre Requirements for INDI
 sudo apt -y install libnova-dev libcfitsio-dev libusb-1.0-0-dev libusb-dev zlib1g-dev libgsl-dev build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev
-sudo apt -y install libftdi-dev libgps-dev libraw-dev libdc1394-22-dev libgphoto2-dev libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev
+sudo apt -y install libftdi-dev libgps-dev libraw-dev libdc1394-25 libgphoto2-dev libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev
 sudo apt -y install ffmpeg libavcodec-dev libavdevice-dev libfftw3-dev libev-dev
 
 #sudo apt install cdbs fxload libkrb5-dev dkms Are these needed too???
@@ -821,7 +821,7 @@ sudo apt -y install xplanet
 
 # Installs Pre Requirements for KStars
 sudo apt -y install build-essential cmake git libeigen3-dev libcfitsio-dev zlib1g-dev libindi-dev extra-cmake-modules libkf5plotting-dev libqt5svg5-dev libkf5iconthemes-dev wcslib-dev libqt5sql5-sqlite
-sudo apt -y install libkf5xmlgui-dev kio-dev kinit-dev libkf5newstuff-dev kdoctools-dev libkf5notifications-dev libqt5websockets5-dev qtdeclarative5-dev libkf5crash-dev gettext qml-module-qtquick-controls qml-module-qtquick-layouts
+sudo apt -y install libkf5xmlgui-dev kio kinit-dev libkf5newstuff-dev kdoctools5 libkf5notifications-dev libqt5websockets5-dev qtdeclarative5-dev libkf5crash-dev gettext qml-module-qtquick-controls qml-module-qtquick-layouts
 sudo apt -y install libkf5notifyconfig-dev libqt5datavisualization5-dev qt5keychain-dev
 
 # This builds and installs StellarSolver
@@ -912,7 +912,7 @@ sudo -H -u $SUDO_USER make -j $(expr $(nproc) + 2)
 sudo make install
 
 display "Installing Dependencies for wxFormBuilder and PHD Log Viewer"
-sudo apt -y install libwxgtk3.0-dev libwxgtk-media3.0-dev meson
+sudo apt -y install libwxgtk3.2-1 libwxgtk-media3.2-1 meson
 
 # This code will build and install PHD Log Viewer.  If you don't want it, comment it out.
 display "Building and Installing PHD Log Viewer"
