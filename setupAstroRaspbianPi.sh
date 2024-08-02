@@ -624,10 +624,10 @@ fi
 
 # This will create a swap file for an increased 2 GB of artificial RAM.  This is not needed on all systems, since different cameras download different size images, but if you are using a DSLR, it definitely is.
 # This method is disabled in favor of the zram method below. If you prefer this method, you can re-enable it by taking out the #'s
-#display "Creating SWAP Memory"
-#wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
-#sh swap 2G
-#rm swap
+display "Creating SWAP Memory"
+wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
+sh swap 2G
+rm swap
 
 # This will create zram, basically a swap file saved in RAM. It will not read or write to the SD card, but instead, writes to compressed RAM.  
 # This is not needed on all systems, since different cameras download different size images, and different SBC's have different RAM capacities but 
@@ -893,7 +893,7 @@ else
 fi
 
 # Installs PHD2 if you want it.  If not, comment each line out with a #.
-sudo apt -y install libwxgtk3.0-dev
+sudo apt -y install libwxgtk3.2-1
 display "Building and Installing PHD2"
 
 if [ ! -d $USERHOME/AstroRoot/phd2 ]
