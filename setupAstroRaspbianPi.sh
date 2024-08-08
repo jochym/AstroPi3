@@ -671,7 +671,7 @@ sudo apt -y install libnova-dev libcfitsio-dev libusb-1.0-0-dev libusb-dev zlib1
 display "debug 2"
 sudo apt -y install libftdi-dev libgps-dev libraw-dev libdc1394-dev libgphoto2-dev libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev
 display "debug 3"
-sudo apt -y install ffmpeg libavcodec-dev libavdevice-dev libfftw3-dev libev-dev
+sudo apt -y install ffmpeg libavcodec-dev libavdevice-dev libfftw3-dev libev-dev libczmq-dev
 
 #sudo apt install cdbs fxload libkrb5-dev dkms Are these needed too???
 
@@ -823,7 +823,7 @@ sudo apt -y install xplanet
 
 # Installs Pre Requirements for KStars
 sudo apt -y install build-essential cmake git libeigen3-dev libcfitsio-dev zlib1g-dev libindi-dev extra-cmake-modules libkf5plotting-dev libqt5svg5-dev libkf5iconthemes-dev wcslib-dev libqt5sql5-sqlite
-sudo apt -y install libkf5xmlgui-dev kio kinit-dev libkf5newstuff-dev libkf5kdoctools-dev libkf5notifications-dev libqt5websockets5-dev qtdeclarative5-dev libkf5crash-dev gettext qml-module-qtquick-controls qml-module-qtquick-layouts
+sudo apt -y install libkf5xmlgui-dev kio kinit-dev libkf5newstuff-dev libkf5doctools-dev libkf5notifications-dev libqt5websockets5-dev qtdeclarative5-dev libkf5crash-dev gettext qml-module-qtquick-controls qml-module-qtquick-layouts
 sudo apt -y install libkf5notifyconfig-dev libqt5datavisualization5-dev qt5keychain-dev appstream
 
 # This builds and installs StellarSolver
@@ -895,7 +895,7 @@ else
 fi
 
 # Installs PHD2 if you want it.  If not, comment each line out with a #.
-sudo apt -y install libwxgtk3.2-1
+sudo apt -y install libwxgtk3.2-dev
 display "Building and Installing PHD2"
 
 if [ ! -d $USERHOME/AstroRoot/phd2 ]
@@ -914,7 +914,7 @@ sudo -H -u $SUDO_USER make -j $(expr $(nproc) + 2)
 sudo make install
 
 display "Installing Dependencies for wxFormBuilder and PHD Log Viewer"
-sudo apt -y install libwxgtk3.2-1 libwxgtk-media3.2-1 meson
+sudo apt -y install libwxgtk3.2-dev libwxgtk-media3.2-dev meson
 
 # This code will build and install PHD Log Viewer.  If you don't want it, comment it out.
 display "Building and Installing PHD Log Viewer"
