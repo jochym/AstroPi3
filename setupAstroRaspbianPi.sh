@@ -895,7 +895,7 @@ else
 fi
 
 # Installs PHD2 if you want it.  If not, comment each line out with a #.
-sudo apt -y install libwxgtk3.2-dev
+sudo apt -y install libwxgtk3.2-dev libopencv-dev
 display "Building and Installing PHD2"
 
 if [ ! -d $USERHOME/AstroRoot/phd2 ]
